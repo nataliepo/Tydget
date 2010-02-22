@@ -1,0 +1,34 @@
+<html>
+
+<head><Title>DEMO</title>
+	
+<script src="http://code.jquery.com/jquery-latest.js"></script>	
+</head>
+	
+	
+<body>
+	
+	<h2>Tydget Demo</h2>
+
+<div id="images">
+	
+	
+</div>
+
+<script>$.getJSON("http://api.typepad.com/users/6p00e5539faa3b8833/events.json?max-results=5&jsoncallback=?",
+	function(data) {
+		$.each(data.items, function(i,item) {
+			$("<p/>").attr("src", item.published.m).appendTo("#images");
+		});
+	});
+</script>
+	
+<!-- <script type="text/javascript" src="http://api.typepad.com/users/6p00e5539faa3b8833/events.json?max-results=10"></script> --> 
+
+		
+
+
+</body>
+
+
+</html>
