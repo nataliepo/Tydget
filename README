@@ -1,0 +1,25 @@
+install:
+
+  mkdir /Library/WebServer/Documents/django_templates/
+  mkdir /Library/WebServer/Documents/django_templates/polls/
+
+  mv django_frontend/index.html /Library/WebServer/Documents/django_templates/polls
+
+usage:
+
+	cd django_server/tydget_server
+
+	python manage.py runserver
+	
+View http://127.0.0.1:8000/polls/
+	* should show an error message, XID is required
+	
+View http://127.0.0.1:8000/polls/1231134/ (any [\d]+)
+	* should show nataliepo's user information (hardcoded)
+	
+	
+remaining tasks:
+	* remove hardcoding of nataliepo's xid
+	* fix urls.py to respect regexp rules (6p([\d]+))
+	* provide meaningful listing of objects instead of junk
+	
