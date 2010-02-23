@@ -1,0 +1,27 @@
+{% if hello_string %}
+    <h2>
+		{{ hello_string}}
+	</h2>
+{% else %}
+	<h3>omg, i cannot find the hello_string!</h3>
+{% endif %}
+
+
+<hr/>
+
+{% if js_str %}
+	<p>JS string = "{{ js_str }}"</p>
+{% else %}
+	<p>there's no js string.</p>
+{% endif %}
+
+
+{% if js_str %}
+	<ol>
+		{% if js_str.preferredUsername %}
+		<li>Preferred Username: {{ js_str.preferredUsername }}</li>
+		{% else %}
+		<li>There is no preferred username.</li>
+		{% endif %}
+	</ol>
+{% endif %}
