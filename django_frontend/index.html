@@ -6,22 +6,34 @@
 	<h3>omg, i cannot find the hello_string!</h3>
 {% endif %}
 
-
-<hr/>
-
-{% if js_str %}
-	<p>JS string = "{{ js_str }}"</p>
-{% else %}
-	<p>there's no js string.</p>
-{% endif %}
-
-
+{% comment %}
 {% if js_str %}
 	<ol>
-		{% if js_str.preferredUsername %}
-		<li>Preferred Username: {{ js_str.preferredUsername }}</li>
+		{% if js_str.totalResults %}
+		<li>TOTAL RESULTS: {{ js_str.totalResults }}</li>
 		{% else %}
-		<li>There is no preferred username.</li>
+		<li>Unknown number of total results.</li>
 		{% endif %}
 	</ol>
 {% endif %}
+{% endcomment %}
+
+<ol>
+    {% for entry in js_str.entries %}
+        <li><a href="{{ entry.object.permalinkURL }}">{{ entry.object.content }}</a></li>
+    {% endfor %}
+</ol>
+
+
+
+<hr/>
+
+{% if debug %}
+	{% if js_str %}
+		<p>JS string = "{{ js_str }}"</p>
+	{% else %}
+		<p>there's no js string.</p>
+	{% endif %}
+{% endif %}
+
+

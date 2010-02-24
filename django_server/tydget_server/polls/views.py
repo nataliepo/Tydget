@@ -15,7 +15,12 @@ def no_param_index(request):
 	
 def xid_index(request, xid):
 	natalies_xid = '6p00e5539faa3b8833'
-	typepad_api_url = 'http://api.typepad.com/users/%s.json' % natalies_xid
+	mmmeows_group_xid = '6p0120a6255c8c970b'
+	
+	debug = 0
+
+#	typepad_api_url = 'http://api.typepad.com/users/%s.json' % natalies_xid
+	typepad_api_url = 'http://api.typepad.com/groups/%s/events.json?max-results=5&start-index=1' % mmmeows_group_xid
 
 	handle = urllib2.Request(typepad_api_url)
 
@@ -33,6 +38,7 @@ def xid_index(request, xid):
 	c = Context({
 		'hello_string': output,	
 		'js_str': js_str,
+		'debug': debug,
 	})
 #	return HttpResponse(output)
 	return HttpResponse(t.render(c))
