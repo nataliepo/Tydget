@@ -18,8 +18,12 @@ View http://127.0.0.1:8000/polls/1231134/ (any [\d]+)
 	* should show nataliepo's user information (hardcoded)
 	
 	
+*** http://127.0.0.1:8000/group/12346/ is the newest url.	
+	
+	
 remaining tasks:
 	* remove hardcoding of nataliepo's xid
 	* fix urls.py to respect regexp rules (6p([\d]+))
 	* provide meaningful listing of objects instead of junk
+
 	
