@@ -34,21 +34,24 @@ def user_request (request, xid):
 		
 	
 def group_request(request, xid):
-	mmmeows_group_xid = '6p0120a6255c8c970b'
+#	mmmeows_group_xid = '6p0120a6255c8c970b'
+# 	avatars_group_xid = '6p0120a6255c8c970b'
 	
-	debug = 1
+	debug = 0
 
-	typepad_api_url = 'http://api.typepad.com/groups/%s/events.json?max-results=5&start-index=1' % mmmeows_group_xid
+	typepad_api_url = 'http://api.typepad.com/groups/%s/events.json?max-results=5&start-index=1' % xid
 
 	handle = urllib2.Request(typepad_api_url)
 
-#	try:
-	js_str = simplejson.load(urllib2.urlopen(handle))
-#	js_str = "just a dummy"
+	try:
+		js_str = simplejson.load(urllib2.urlopen(handle))
+	except IOError, e:
+		print "parsing the API failed"
+		return False
+		
+	# store the entries
+	#entries = js_str.entries
 	
-#	except IOError, e:
-#		print "parsing the API failed"
-#		return False
 	
 	
 	output = "Pelham 1 2 3, come in."

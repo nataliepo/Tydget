@@ -1,5 +1,7 @@
 # Django settings for tydget_server project.
 
+from typepadapp.settings import *
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -61,6 +63,24 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+
+# added from TypePad
+#	'typepadapp.csrf_middleware.CsrfMiddleware', # django.contrib.csrf.middleware
+#   'typepadapp.middleware.ConfigurationMiddleware',
+#   'typepadapp.debug_middleware.DebugToolbarMiddleware',
+#   'typepadapp.middleware.ApplicationMiddleware',
+#   'typepadapp.middleware.UserAgentMiddleware',
+#   'typepadapp.middleware.AuthorizationExceptionMiddleware',
+)
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.core.context_processors.auth',
+    'django.core.context_processors.media',
+    'django.core.context_processors.debug',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.request',
+    'djangoflash.context_processors.flash',
+#    'typepadapp.context_processors.settings',
 )
 
 ROOT_URLCONF = 'tydget_server.urls'
@@ -78,4 +98,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
 	'tydget_server.polls',
+#	'typepadapp',
+   
 )
+
+BACKEND_URL = 'https://api.typepad.com'

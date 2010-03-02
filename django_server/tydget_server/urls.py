@@ -16,7 +16,7 @@ urlpatterns = patterns('',
     # (r'^admin/', include(admin.site.urls)),
 	(r'^polls/$', 'tydget_server.polls.views.no_param_index'),
     (r'^polls/(?P<xid>\d+)/$', 'tydget_server.polls.views.xid_index'),
-    (r'^group/(?P<xid>\d+)/$', 'tydget_server.polls.views.group_request'),
+    (r'^group/(?P<xid>\w+).js$', 'tydget_server.polls.views.group_request'),
     (r'^user/(?P<xid>\d+)/$', 'tydget_server.polls.views.user_request'),
 
 )
