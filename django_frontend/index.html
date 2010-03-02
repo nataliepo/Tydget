@@ -1,3 +1,5 @@
+
+{% comment %}
 <html>
 <head>
 <style>
@@ -32,6 +34,7 @@
 </head>
 
 <body>
+{% endcomment %}
 
 <div class="typepad_widget">
 	<div class="body">
@@ -42,13 +45,49 @@
 		        	{% comment %}
 					--- This doesn't work. ---
 		 			{% with object.author.links|height:50 as userpic %}
-		            	<img src="{{ userpic.href }}" width="100" height="100" alt="{{ member.display_name }}" />
+		            	<img src="{{ userpic.href }}" width="100" height="100" 
+							alt="{{ member.display_name }}" />
 		        	{% endwith %}
 					{% endcomment %}
 					<img src="{{ entry.object.author.avatarLink.url }}" class="thumbnail" />
 				</div>
 				<div class="event-detail">
-					<a href="{{entry.object.author.profilePageURL}}">@{{entry.object.author.preferredUsername}}</a>:&nbsp;wrote&nbsp;<a href="{{ entry.object.permalinkURL }}">{{ entry.object.content }}</a>
+					<a href="{{entry.actor.profilePageUrl}}">{{entry.actor.displayName}}</a>:
+					{% comment %}
+						-- video --
+					{% endcomment %}
+					{% if entry.object.videoLink %}
+						shared a video called <a href="{{ entry.object.permalinkURL }}">{{ entry.object.title }}</a>
+						
+					{% comment %}
+						-- photo --
+					{% endcomment %}
+					{% else %}
+						{% if entry.object.imageLink %}
+							shared 
+							{% if entry.object.title %}
+						 		a photo called <a href="{{ entry.object.permalinkURL }}">{{ entry.object.title }}</a>
+							{% else %}
+								{% if entry.object.content %}
+									a photo called <a href="{{ entry.object.permalinkURL }}">{{ entry.object.content|truncatewords:4 }}...</a>
+								{% else %}
+									<a href="{{ entry.object.permalinkURL }}">an untitled photo</a>
+								{% endif %}
+							{% endif %}
+						{% else %}
+							wrote <a href="{{ entry.object.permalinkUrl }}">{{ entry.object.content|truncatewords:7 }}</a>
+						
+						{% endif %}
+					{% endif %}
+					{% comment %}
+						This is what Motion uses but I can't figure out how to use.
+					at {{entry.object.published|date_microformat}}
+					{% endcomment %}
+					<br />
+					{% comment %}
+						THIS TIMESTAMP IS SO UGLY.
+						t: {{entry.object.published}}
+					{% endcomment %}
 				</div>
 			</div>
 		</div>
@@ -86,5 +125,8 @@
 	</ol>
 {% endif %}
 {% endcomment %}
+
+{% comment %}
 </body>
 </html>
+{% endcomment %}
