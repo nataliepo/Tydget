@@ -43,8 +43,30 @@ function outer_div_setup(tydget) {
     // build the initial divs.
     var outer_div = document.createElement("div");
     outer_div.setAttribute("class", "typepad_widget");
+
     var body_div = document.createElement("div");
     body_div.setAttribute("class", "body");
+    
+    // add a header div here.
+    
+    var header_div = document.createElement("div");
+    header_div.setAttribute("class", "header-div");
+    
+    var header_title = document.createElement("a");
+    header_title.setAttribute("class", "header-title");
+    header_title.setAttribute("href", "http://www.mmmeow.com");
+    header_title.innerHTML = ("mmmeow");  
+    
+   var header_precursor = document.createElement("div");
+    header_precursor.setAttribute("class", "header-precursor");
+    header_precursor.innerHTML = "recently on"; 
+    
+    header_div.appendChild(header_precursor);   
+    header_div.appendChild(header_title);
+    
+    body_div.appendChild(header_div);
+    
+    
     var inner_body_div = document.createElement("div");
     inner_body_div.setAttribute("class", "inner-body");
 
@@ -88,16 +110,19 @@ function create_event_snippet(obj, outer_div, author) {
       // set up the event-detail div.
       var event_detail_div = document.createElement("div");
       event_detail_div.setAttribute("class", "event-detail");
-      var title_str = document.createElement("p");
+      var full_action_string = document.createElement("p");
+      full_action_string.setAttribute("class", "action-string");
       
       // create another author_profile_link here.
       var author_profile_link_2 = document.createElement('a');
       author_profile_link_2.setAttribute("href", author.profilePageUrl);
       author_profile_link_2.setAttribute("class", "author_link");
       author_profile_link_2.innerHTML = author.displayName;
-      title_str.appendChild(author_profile_link_2);
+/*      title_str.appendChild(author_profile_link_2); */
       
-      var dummy_div = document.createElement('div');
+      var action_string = document.createElement('a');
+      action_string.setAttribute("href", obj.permalinkUrl);
+      action_string.setAttribute("class", "action-string");
       
       var title = "";
       // create the title.
@@ -115,10 +140,16 @@ function create_event_snippet(obj, outer_div, author) {
       if (title) {
          html_string += " titled '" + title + "'";
       }
-      dummy_div.innerHTML = html_string;
-      title_str.appendChild(dummy_div);
+      action_string.innerHTML = html_string;
+/*      title_str.appendChild(dummy_div); */
+      
+      full_action_string.appendChild(author_profile_link_2); 
+      full_action_string.appendChild(action_string);
 
-      event_detail_div.appendChild(title_str);
+      event_detail_div.appendChild(full_action_string);
+      
+//      event_detail_div.appendChild(event_footer_div); 
+      outer_div.appendChild(event_detail_div);
       
       //--------- now for the bottom comment + fav counts.
       var fav_count = obj.favoriteCount;
@@ -135,15 +166,30 @@ function create_event_snippet(obj, outer_div, author) {
       var comment_link = document.createElement('a');
       comment_link.setAttribute('href', obj.permalinkUrl);
       comment_link.setAttribute('class', 'comment-link');
-      comment_link.innerHTML = obj.commentCount + " Comments, " + 
-                               obj.favoriteCount + " Favorites";
+      comment_link.innerHTML = obj.commentCount;
       
       comment_div.appendChild(comment_link); 
       event_footer_div.appendChild(comment_div); 
       
       
-      event_detail_div.appendChild(event_footer_div); 
-      outer_div.appendChild(event_detail_div);
+      var fav_div = document.createElement('div');
+      fav_div.setAttribute('class', 'fav-div');
+      var fav_link = document.createElement('a');
+      fav_link.setAttribute('href', obj.permalinkUrl);
+      fav_link.setAttribute('class', 'fav-link');
+      fav_link.innerHTML = obj.favoriteCount;
+      
+      fav_div.appendChild(fav_link);
+      // Having a really hard time getting the Favorites star
+      // aligned with the Comment bubbles :(
+      //event_footer_div.appendChild(fav_div); 
+      
+//      event_detail_div.appendChild(event_footer_div);
+      
+      outer_div.appendChild(event_footer_div); 
+      
+      
+
 }
 
 function get_post_wording(obj) {
