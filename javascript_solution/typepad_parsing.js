@@ -21,7 +21,7 @@ function event_callback(json_response) {
                 
               // the outer wrapper of this event.
               var outer_div = document.createElement("div");
-              outer_div.setAttribute("class", "event");
+              outer_div.setAttribute("class", "tydget-event");
                  
               create_event_snippet(json_response.entries[i].object, outer_div, author);
            }
@@ -32,10 +32,9 @@ function event_callback(json_response) {
            inner_body_div.appendChild(outer_div);
         }
     }
-    // natalie, you left off here!
-    // need to add another div to typepad_widget, not the outer tydget.
-    // may need to set an id and grab by getElementById?
-    //    var outer_body_div = footer_div_setup(json_response.entries[0].object);
+
+
+    var outer_body_div = footer_div_setup(json_response.entries[0].object);
 }
 
 
@@ -43,25 +42,27 @@ function outer_div_setup(tydget, obj) {
 
     // build the initial divs.
     var outer_div = document.createElement("div");
-    outer_div.setAttribute("class", "typepad_widget");
+    outer_div.setAttribute("class", "tydget");
+    outer_div.setAttribute("id", "tydget");
 
     var body_div = document.createElement("div");
-    body_div.setAttribute("class", "body");
+    body_div.setAttribute("class", "tydget-body");
+    body_div.setAttribute("id", "tydget-body");
     
     // add a header div here.
     
     var header_div = document.createElement("div");
-    header_div.setAttribute("class", "header-div");
+    header_div.setAttribute("class", "tydget-header-div");
     
     var header_title = document.createElement("a");
-    header_title.setAttribute("class", "header-title");
+    header_title.setAttribute("class", "tydget-header-title");
 
     header_title.setAttribute("href", get_site_url(obj.permalinkUrl));
     header_title.innerHTML = get_site_name(obj.permalinkUrl);  
 
     
     var header_precursor = document.createElement("div");
-    header_precursor.setAttribute("class", "header-precursor");
+    header_precursor.setAttribute("class", "tydget-header-precursor");
     header_precursor.innerHTML = "recently on"; 
     
     header_div.appendChild(header_precursor);   
@@ -71,7 +72,8 @@ function outer_div_setup(tydget, obj) {
     
     
     var inner_body_div = document.createElement("div");
-    inner_body_div.setAttribute("class", "inner-body");
+    inner_body_div.setAttribute("class", "tydget-inner-body");
+    inner_body_div.setAttribute("id", "tydget-inner-body");
 
     body_div.appendChild(inner_body_div);
     outer_div.appendChild(body_div);
@@ -90,19 +92,19 @@ function create_event_snippet(obj, outer_div, author) {
       var userpic_img_url = get_resized_avatar(author, 50);
       var userpic_img = document.createElement("img");
       userpic_img.setAttribute("src", userpic_img_url);
-      userpic_img.setAttribute("class", "thumbnail");
+      userpic_img.setAttribute("class", "tydget-thumbnail");
       
       var author_profile_link = document.createElement('a');
       author_profile_link.setAttribute("href", author.profilePageUrl);
       author_profile_link.appendChild(userpic_img);
 
       var avatar_itself_div = document.createElement("div");
-      avatar_itself_div.setAttribute("class", "avatar-itself");
+      avatar_itself_div.setAttribute("class", "tydget-avatar-itself");
       avatar_itself_div.appendChild(author_profile_link);
 
       // wrap the userpic in a userpic div.
       var userpic_div = document.createElement("div");
-      userpic_div.setAttribute("class", "avatar-wrapper");
+      userpic_div.setAttribute("class", "tydget-avatar-wrapper");
       userpic_div.appendChild(avatar_itself_div);
       
       // now append this to the Event class.
@@ -112,20 +114,20 @@ function create_event_snippet(obj, outer_div, author) {
       
       // set up the event-detail div.
       var event_detail_div = document.createElement("div");
-      event_detail_div.setAttribute("class", "event-detail");
+      event_detail_div.setAttribute("class", "tydget-event-detail");
       var full_action_string = document.createElement("p");
-      full_action_string.setAttribute("class", "action-string");
+      full_action_string.setAttribute("class", "tydget-action-string");
       
       // create another author_profile_link here.
       var author_profile_link_2 = document.createElement('a');
       author_profile_link_2.setAttribute("href", author.profilePageUrl);
-      author_profile_link_2.setAttribute("class", "author_link");
-      author_profile_link_2.innerHTML = author.displayName;
+      author_profile_link_2.setAttribute("class", "tydget-author_link");
+      author_profile_link_2.innerHTML = get_author_name(author);
 /*      title_str.appendChild(author_profile_link_2); */
       
       var action_string = document.createElement('a');
       action_string.setAttribute("href", obj.permalinkUrl);
-      action_string.setAttribute("class", "action-string");
+      action_string.setAttribute("class", "tydget-action-string");
       
       var post_type = get_post_wording(obj);
       var action = get_action_wording(obj);
@@ -165,13 +167,13 @@ function create_event_snippet(obj, outer_div, author) {
       var fav_on = 'http://mmmeow.com/static/themes/app/images/fav-on.gif';
 
       var event_footer_div = document.createElement('div');
-      event_footer_div.setAttribute("class", "event_footer_div");
+      event_footer_div.setAttribute("class", "tydget-event_footer_div");
 
       var comment_div = document.createElement('div');
-      comment_div.setAttribute('class', "comment-div");
+      comment_div.setAttribute('class', "tydget-comment-div");
       var comment_link = document.createElement('a');
       comment_link.setAttribute('href', obj.permalinkUrl);
-      comment_link.setAttribute('class', 'comment-link');
+      comment_link.setAttribute('class', 'tydget-comment-link');
       comment_link.innerHTML = obj.commentCount;
       
       comment_div.appendChild(comment_link); 
@@ -179,10 +181,10 @@ function create_event_snippet(obj, outer_div, author) {
       
       
       var fav_div = document.createElement('div');
-      fav_div.setAttribute('class', 'fav-div');
+      fav_div.setAttribute('class', 'tydget-fav-div');
       var fav_link = document.createElement('a');
       fav_link.setAttribute('href', obj.permalinkUrl);
-      fav_link.setAttribute('class', 'fav-link');
+      fav_link.setAttribute('class', 'tydget-fav-link');
       fav_link.innerHTML = obj.favoriteCount;
       
       fav_div.appendChild(fav_link);
@@ -198,6 +200,14 @@ function create_event_snippet(obj, outer_div, author) {
 
 }
 
+
+function get_author_name (author_obj) {
+    if (author_obj.displayName) {
+        return author_obj.displayName;
+    }
+    
+    return "A Member";
+}
 function get_post_wording(obj) {
    
    var str = "";
@@ -344,7 +354,34 @@ function capitalize_string (name) {
 function footer_div_setup(tydget, obj) {
       // build the initial divs.
 
-      outer_div.setAttribute("class", "tydget-footer-outer");  
+      var footer_outer_div = document.createElement('div');
+      footer_outer_div.setAttribute("class", "tydget-footer-outer");  
       
-      tydget.appendChild(outer_div);
+      var footer_inner_div = document.createElement("a");
+      footer_inner_div.setAttribute("class", "tydget-footer-inner");
+      footer_inner_div.setAttribute("href", "http://www.typepad.com");
+      footer_inner_div.innerHTML = ".";
+      
+      var footer_logo_div = document.createElement("a");
+      footer_logo_div.setAttribute("class", "tydget-footer-logo");
+      footer_logo_div.setAttribute("href", "http://www.typepad.com");
+      footer_logo_div.innerHTML = ".";
+      
+      
+      
+      // now nest the divs.
+//      footer_inner_div.appendChild(footer_logo_div);
+      footer_outer_div.appendChild(footer_inner_div);
+      
+      
+      
+      // attempt to get the outer div
+      var entire_widget = document.getElementById('tydget-body');
+
+      if (!entire_widget) {
+          return;
+      }
+      
+      entire_widget.appendChild(footer_outer_div);
+
 }

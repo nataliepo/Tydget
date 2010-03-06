@@ -16,15 +16,22 @@
 			.typepad_widget {
 				/* border: 2px dotted; */
 				border: 5px solid #DDDDDD;
-				width: 350px;
-				height: 358px;
+				width: 380px;
+				height: 385px;
+
+
+/*				height without the footer in place
+
+                height: 358px; 
+*/
 
 /*				blue lady -- look ok but doesnt stretch well
 				background: #0B4081 url('http://a6.typepad.com/6a0128755f6728970c0120a8ee3116970b-500pi') no-repeat scroll 0 bottom ; 
 */
 
 
-				background: #0B4081 url('http://a4.typepad.com/6a0128755f6728970c01310f366974970c-640pi') no-repeat scroll 0 0;  
+/*				background: #0B4081 url('http://a4.typepad.com/6a0128755f6728970c01310f366974970c-640pi') no-repeat scroll 0 0;   */
+                background: #0B4081;
 
 
 
@@ -39,6 +46,8 @@
 				overflow: auto; 
 				height: 290px;
 /*				margin-right: 2px; */
+                background: #0B4081 url('http://a4.typepad.com/6a0128755f6728970c01310f366974970c-640pi') no-repeat scroll 0 0;  
+
 			}
 
 			img.thumbnail {
@@ -179,8 +188,32 @@
 			}
 			
 			.tydget-footer-outer {
-				height: 200px;
+                clear: both;
+				height: 20px;
+/*
 				color: #FFFF00;
+				display: block; 
+				margin-top: 5px;
+				padding: 4px 6px;
+*/
+				width: auto;
+			}
+			
+			.tydget-footer-inner {
+			    float: right;
+			    margin-right: 4px;
+			    background: transparent url('http://www.parishilton.com/paris-hilton/site-styles/images/footer-logo-tp.gif') no-repeat 0 0;
+			    display: block;
+			    width: 150px;
+
+			}
+			.tydget-footer-logo {
+                
+                 float: right;
+                 width: auto;
+                 text-decoration: none;
+                 color: #0B4081;
+
 			}
 		</style>	
 		
@@ -188,7 +221,7 @@
 	
 
 	<!--<script type="text/javascript" src="http://community.parishilton.com/events-cached.js?callback=?jsonTypePadEventsFeed"></script>-->
-	<script type="text/javascript" src="http://localhost/typepad/javascript_solution/typepad_parsing.js"></script> 
+	<script type="text/javascript" src="http://localhost/Tydget/javascript_solution/typepad_parsing.js"></script> 
 	<script type="text/javascript" src="http://api.typepad.com/groups/6p0128755f317d970c/events.js?max-results=15&start-index=1&callback=event_callback"></script>
 </body>
 
