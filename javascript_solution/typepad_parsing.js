@@ -9,36 +9,37 @@ function event_callback(json_response) {
     }
 
     // set up the divs.
-   var inner_body_div = outer_div_setup(tydget);
+   var inner_body_div = outer_div_setup(tydget, json_response.entries[0].object);
 
 
    for (var i = 0; i < json_response.entries.length; i++) {
-        
-      
         var author = json_response.entries[i].actor;
+        var outer_div = document.createElement("div");
         
         if (author) {
-             
-             if (json_response.entries[i].object) {           
+           if (json_response.entries[i].object) {           
                 
-                  // the outer wrapper of this event.
-                 var outer_div = document.createElement("div");
-                 outer_div.setAttribute("class", "event");
+              // the outer wrapper of this event.
+              var outer_div = document.createElement("div");
+              outer_div.setAttribute("class", "event");
                  
-                create_event_snippet(json_response.entries[i].object, outer_div, author);
-             }
-             else {
-                // alert("Error on this event; skipping it.");
-             }
+              create_event_snippet(json_response.entries[i].object, outer_div, author);
+           }
+           else {
+              // alert("Error on this event; skipping it.");
+           }
         
-             // add the outer_div (Event) to the inner-body.
-             inner_body_div.appendChild(outer_div);
-         }
+           inner_body_div.appendChild(outer_div);
+        }
     }
+    // natalie, you left off here!
+    // need to add another div to typepad_widget, not the outer tydget.
+    // may need to set an id and grab by getElementById?
+    //    var outer_body_div = footer_div_setup(json_response.entries[0].object);
 }
 
 
-function outer_div_setup(tydget) {
+function outer_div_setup(tydget, obj) {
 
     // build the initial divs.
     var outer_div = document.createElement("div");
@@ -54,10 +55,12 @@ function outer_div_setup(tydget) {
     
     var header_title = document.createElement("a");
     header_title.setAttribute("class", "header-title");
-    header_title.setAttribute("href", "http://www.mmmeow.com");
-    header_title.innerHTML = ("mmmeow");  
+
+    header_title.setAttribute("href", get_site_url(obj.permalinkUrl));
+    header_title.innerHTML = get_site_name(obj.permalinkUrl);  
+
     
-   var header_precursor = document.createElement("div");
+    var header_precursor = document.createElement("div");
     header_precursor.setAttribute("class", "header-precursor");
     header_precursor.innerHTML = "recently on"; 
     
@@ -124,21 +127,24 @@ function create_event_snippet(obj, outer_div, author) {
       action_string.setAttribute("href", obj.permalinkUrl);
       action_string.setAttribute("class", "action-string");
       
-      var title = "";
-      // create the title.
-      if (obj.title) {
-         title = obj.title.substring(0, 80);
-      }
-      else if (obj.content) {
-         title = obj.content.substring(0, 80);
-      }
-      
       var post_type = get_post_wording(obj);
       var action = get_action_wording(obj);
+      
+      var title = "";
+      // create the title.
+      // Audio link titles have funky strings.
+      if (obj.title && (!obj.audioLink)) {
+         title = chop_str(obj.title, (95 - action.length - post_type.length - author.displayName.length)); //.substring(0, 75);
+      }
+      else if (obj.content) {
+         title = chop_str(obj.content, (95 - action.length - post_type.length - author.displayName.length));
+      }
+      
+
 
       var html_string = " " + action + " " + post_type;
       if (title) {
-         html_string += " titled '" + title + "'";
+         html_string += " '" + title + "'";
       }
       action_string.innerHTML = html_string;
 /*      title_str.appendChild(dummy_div); */
@@ -194,23 +200,30 @@ function create_event_snippet(obj, outer_div, author) {
 
 function get_post_wording(obj) {
    
+   var str = "";
    if (obj.videoLink) {
-      return "a video";
+      str = "a video";
    }
    else if (obj.imageLink) {
-      return "an image";
+      str = "an image";
    }
    else if (obj.targetUrl) {
-      return "a link";
+      str = "a link";
    }
-   else {
-      return "something";
+   else if (obj.audioLink) {
+      str = "a soundclip";
    }
+
+   if (str && (((obj.title && !obj.audioLink) || obj.content))) {
+      str += " called";
+   }
+   
+   return str;
 
 }
 
 function get_action_wording(obj) {
-   if (obj.videoLink || obj.targetURL) {
+   if (obj.videoLink || obj.targetURL || obj.audioLink) {
       return "shared";
    }
    
@@ -236,4 +249,102 @@ function get_date (date_str) {
  //  my month = get_month(date_parts[1]);
    
  //  alert("this month = " + month);
+}
+function get_site_name(url) {
+//   return "the community";
+   if (!url) {
+      return "Community";
+   }
+   
+   var url_parts = new Array();
+   url_parts = url.split("/");
+
+   // the first two should represent the http.
+   // the next should represent everything up to the slash.
+   
+   // If it's a (something).typepad.com, just show the something.
+   var name = url_parts[2];
+   var snippet_parts = new Array();
+   snippet_parts = name.split(".");
+   if (snippet_parts[1] == "typepad") {
+      name = snippet_parts[0];
+   }
+   else if ((snippet_parts[1] == "com") ||
+            (snippet_parts[1] == "info") ||
+            (snippet_parts[1] == "org")) {
+      // this is the case where there's no subdomain, so just use the domain.
+      name = snippet_parts[0];
+   }
+   else {
+      // otherwise, if it's a www.NAME.com, so use the inner.
+      name = snippet_parts[1];
+   }
+
+   if (name == "mmmeow") {
+      return name;
+   }
+   else if (name == "womensbookclub") {
+      return "NY Women's Book Club";
+   }
+   
+   name = capitalize_string(name);
+   
+   return "The " + name + " Community";
+}
+
+function get_site_url(url) {
+   
+   if (!url) {
+      return "http://www.typepad.com";
+   }
+   
+   var url_parts = new Array();
+   url_parts = url.split("/");
+   
+   // the first two should represent the http.
+   // the next should represent everything up to the slash.
+   return "http://" + url_parts[2];
+}
+
+
+function chop_str (str, size) {
+   if (str.length <= size) {
+      return str;
+   }
+   
+   var str_parts = new Array();
+   str_parts = str.split(" ");
+   
+   // now we have an array of words.
+   var i = 0;
+
+   var curr = "";
+   var next = str_parts[i];
+   while (next.length < size) {
+      curr += str_parts[i] + ' ';
+      i++;
+      next += str_parts[i] + ' ';
+   }
+  
+   // chop the last space
+   curr = curr.substring(0, (curr.length - 1));
+   return curr + "...";
+}
+
+
+function capitalize_string (name) {
+
+   // make sure name is capitalized.
+    var first_letter = name.substr(0, 1);
+    var rest = name.substr(1, name.length);
+    first_letter = first_letter.toUpperCase();
+    return first_letter + rest;
+}
+
+function footer_div_setup(tydget, obj) {
+      // build the initial divs.
+
+      outer_div.setAttribute("class", "tydget-footer-outer");  
+      
+      tydget.appendChild(outer_div);
 }

@@ -1,25 +1,44 @@
 <html>
+	<meta name="http-equiv" content="Content-type: text/html; charset=UTF-8"/>
 <head>
 
 	<!-- var mmmeow_events_url = 'http://api.typepad.com/groups/6p0120a6255c8c970b/events.json?max-results=5&start-index=1'; -->
 		
 
 
-	<title>another site</title>
+	<title>Avatar Tydget</title>
 
 </head>
 <body>
-	<h1> hello, here i am on another site!</h1>
 
 
 		<style type="text/css">
 			.typepad_widget {
 				/* border: 2px dotted; */
-				border: 10px solid #B6D5E8;
+				border: 5px solid #DDDDDD;
 				width: 350px;
+				height: 358px;
 
-				background: #ACF1FF url('http://www.mmmeow.com/static/themes/app/images/rainbow.png') no-repeat scroll 15px bottom;
+/*				blue lady -- look ok but doesnt stretch well
+				background: #0B4081 url('http://a6.typepad.com/6a0128755f6728970c0120a8ee3116970b-500pi') no-repeat scroll 0 bottom ; 
+*/
+
+
+				background: #0B4081 url('http://a4.typepad.com/6a0128755f6728970c01310f366974970c-640pi') no-repeat scroll 0 0;  
+
+
+
 				font-family: "Helvetica Neue", Arial, Verdana;
+/*
+	this is on avatar now but looks horrendous locally 
+				font-family: "Lucida Grande,helvetica,sans-serif";
+*/
+			}
+			
+			.inner-body {
+				overflow: auto; 
+				height: 290px;
+/*				margin-right: 2px; */
 			}
 
 			img.thumbnail {
@@ -95,7 +114,9 @@
 				-moz-background-clip: border;
 				-moz-background-inline-policy: continuous;
 				-moz-background-origin: padding;
-				background: transparent url(http://mmmeow.com/static/themes/app/images/favorite.png) no-repeat scroll left 0;			
+
+				background: transparent url(http://avatar.typepad.com/static/themes/app/images/favorite.png) no-repeat scroll left 0;			 
+
 				float: left;
 				background-position: 10px 50%;
 				display: block;
@@ -129,40 +150,46 @@
 
 			.header-div {
 	/*			background: transparent url('http://www.mmmeow.com/static/themes/app/images/banner2.png') no-repeat scroll 0 0; */
-				height: 65px;
+				height: 50px;
 				text-align: right;
 				display: block;
 				padding: 4px 6px;
-				margin-bottom: 14px;
+				margin-bottom: 10px; 
 
 			}
 			.header-title {
 				clear:both;
-				font-size:70px;
-				text-align: right;
+				font-size:30px;
+				text-align: middle;
 				margin-right: 10px;
-				color: #7D44DB;
-				line-height: 35px;
+		/* gray is too light 
+				color: #DDDDDD;
+		*/
+				color: #FFFF00;
+				line-height: 40px;
 				text-decoration: none;
 				font-weight: bold;
 			}
 			.header-precursor {
-				color: #555555;
+				color: #DDDDDD;
 			}
 			a.action-string {
 				text-decoration: none;
 				color: #555555;
 			}
+			
+			.tydget-footer-outer {
+				height: 200px;
+				color: #FFFF00;
+			}
 		</style>	
+		
 	<div id="tydget"></div>
 	
 
 	<!--<script type="text/javascript" src="http://community.parishilton.com/events-cached.js?callback=?jsonTypePadEventsFeed"></script>-->
-	<script type="text/javascript" src="http://dev3.apperceptive.com/typepad/typepad_parsing.js"></script>
-	
-	<script type="text/javascript" src="http://api.typepad.com/groups/6p0128755f359d970c/events.js?max-results=8&start-index=1&callback=event_callback"></script>
-	<p id="json_contents"></p>
-	<hr />
+	<script type="text/javascript" src="http://localhost/typepad/javascript_solution/typepad_parsing.js"></script> 
+	<script type="text/javascript" src="http://api.typepad.com/groups/6p0128755f317d970c/events.js?max-results=15&start-index=1&callback=event_callback"></script>
 </body>
 
 </html>
