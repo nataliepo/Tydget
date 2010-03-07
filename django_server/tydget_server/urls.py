@@ -14,9 +14,10 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     # (r'^admin/', include(admin.site.urls)),
-	(r'^polls/$', 'tydget_server.polls.views.no_param_index'),
-    (r'^polls/(?P<xid>\d+)/$', 'tydget_server.polls.views.xid_index'),
-    (r'^group/(?P<xid>\w+).js$', 'tydget_server.polls.views.group_request'),
-    (r'^user/(?P<xid>\d+)/$', 'tydget_server.polls.views.user_request'),
+#	(r'^polls/$', 'tydget_server.polls.views.no_param_index'),
+#    (r'^polls/(?P<xid>\d+)/$', 'tydget_server.polls.views.xid_index'),
+#    (r'^group/(?P<xid>\w+).js$', 'tydget_server.polls.views.group_request'),
+#    (r'^user/(?P<xid>\d+)/$', 'tydget_server.polls.views.user_request'),
+    (r'^django_parser\.js$', 'tydget_server.polls.views.no_param_index'),
 
 )

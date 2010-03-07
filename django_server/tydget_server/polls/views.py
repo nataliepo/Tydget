@@ -10,8 +10,13 @@ from django.http import HttpResponse
 
 
 def no_param_index(request):
-	return HttpResponse("ERROR: Must pass in a TypePad XID.")
-	
+    t = loader.get_template('typepad-parser-django.js')
+    c = Context({
+        'hello_string': "foo",
+    })
+    
+    return HttpResponse(t.render(c))
+
 	
 def user_request (request, xid):
 	natalies_xid = '6p00e5539faa3b8833'
@@ -23,7 +28,7 @@ def user_request (request, xid):
 	js_str = simplejson.load(urllib2.urlopen(handle))
 	
 	output = "Hooray!  Your XID is: %s." % natalies_xid
-	t = loader.get_template('polls/index.html')
+	t = loader.get_template('index.js')
 	c = Context({
 		'hello_string': output,	
 		'js_str': js_str,
@@ -55,7 +60,7 @@ def group_request(request, xid):
 	
 	
 	output = "Pelham 1 2 3, come in."
-	t = loader.get_template('polls/index.html')
+	t = loader.get_template('index.js')
 	c = Context({
 		'hello_string': output,	
 		'js_str': js_str,

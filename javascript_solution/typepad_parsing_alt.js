@@ -2,44 +2,32 @@ function event_callback(json_response) {
 
     var tydget = document.getElementById("tydget");
 
-    // just return empty set for now.
+    // just return nothing for now.
     if (!tydget) {
-        alert("Couldn't find id=tydget; working through vanilla.");
-        generate_vanilla_example();
         return;
     }
 
     // set up the divs.
-   var inner_body_div = outer_div_setup(tydget, json_response.entries[0].object);
-
-
-   for (var i = 0; i < json_response.entries.length; i++) {
-        var author = json_response.entries[i].actor;
-        var outer_div = document.createElement("div");
-        
-        if (author) {
-           if (json_response.entries[i].object) {           
-                
-              // the outer wrapper of this event.
-              var outer_div = document.createElement("div");
-              outer_div.setAttribute("class", "tydget-event");
-                 
-              create_event_snippet(json_response.entries[i].object, outer_div, author);
-           }
-           else {
-              // alert("Error on this event; skipping it.");
-           }
-        
-           inner_body_div.appendChild(outer_div);
-        }
-    }
-
-
-    var outer_body_div = footer_div_setup(json_response.entries[0].object);
+    var innerHTML = 
+'<div id="tydget">  \n' +    
+'   <div id="tydget" class="tydget"> \n' + 
+'       <div id="tydget-body" class="tydget-body">  \n';
+    
+    innerHTML += build_header(json_response);
+    innerHTML += build_inner_body(json_response);
+    innerHTML += build_footer(json_response);
+    
+    innerHTML += 
+'       </div>\n' + 
+'   </div>\n' + 
+'</div>';
+   
+   tydget.innerHTML = innerHTML;
+   return;
 }
 
 
-function outer_div_setup(tydget, obj) {
+function former_outer_div_setup(tydget, obj) {
 
     // build the initial divs.
     var outer_div = document.createElement("div");
@@ -87,7 +75,7 @@ function outer_div_setup(tydget, obj) {
     
 }
 
-function create_event_snippet(obj, outer_div, author) {
+function former_create_event_snippet(obj, outer_div, author) {
       
       //----------- this controls the userpic on the right side
       var userpic_img_url = get_resized_avatar(author, 50);
@@ -257,6 +245,7 @@ function get_date (date_str) {
 function get_site_name(url) {
 //   return "the community";
    if (!url) {
+//       alert("[get_site_name] name is bad");
       return "Community";
    }
    
@@ -299,6 +288,7 @@ function get_site_name(url) {
 function get_site_url(url) {
    
    if (!url) {
+    //   alert("[get_site_url] url is bad");
       return "http://www.typepad.com";
    }
    
@@ -380,10 +370,135 @@ function footer_div_setup(tydget, obj) {
 
 }
 
-function generate_vanilla_example() {
-    document.write('<p>');
-    document.write("Hello " + 'World, this is Vanilla!');
-    document.write('</p>');
+function build_header(json_response) {
+    var innerHTML = "";
     
-    return 1;
+    // janky workaround since events feed doesnt store url or name
+    var url = get_site_url(json_response.entries[0].object.permalinkUrl);
+    var name = get_site_name(json_response.entries[0].object.permalinkUrl);
+    
+    innerHTML = 
+'           <div class="tydget-header-div"> \n' + 
+'               <div class="tydget-header-precursor"> \n' + 
+'                   recently on \n' + 
+'               </div>\n' + 
+'               <a class="tydget-header-title" href="' + url + '">' + name + '</a> \n' +
+'           </div>  \n';
+    
+    return innerHTML;
+}
+
+function build_inner_body (json_response) {
+    var innerHTML = '<div id="tydget-inner-body" class="tydget-inner-body">';
+    
+    for (var i = 0; i < json_response.entries.length; i++) {
+        var author = json_response.entries[i].actor;
+        if (author) {
+            // Skip null objects in the stream. this is a known bug in the
+            // events api that deleted obj stay in there.
+            if (json_response.entries[i].object) {           
+
+                // the outer wrapper of this event.
+                innerHTML += '<div class="tydget-event">\n';
+                innerHTML += create_event_snippet(json_response.entries[i].object, author); 
+                innerHTML += '</div>';
+             }
+         }
+     }
+    
+     // close out the event div.
+     innerHTML += '\n</div>';
+    
+     return innerHTML;
+}
+
+function build_footer (obj) {
+    var innerHTML = "";
+    
+    innerHTML = 
+'   <div class="tydget-footer-outer">\n' + 
+'       <a class="tydget-footer-inner" href="http://www.typepad.com">Powered by TypePad</a>\n' + 
+'   </div>\n';
+
+    return innerHTML;
+}
+
+function create_event_snippet(obj, author) {
+    var innerHTML = "";
+    
+    innerHTML += create_event_avatar(obj, author);
+    innerHTML += create_event_detail(obj, author);
+    innerHTML += create_event_footer(obj, author);
+
+    return innerHTML;
+}
+
+function create_event_avatar(obj, author) {
+
+    var innerHTML = 
+'       <div class="tydget-avatar-wrapper">\n' + 
+'           <div class="tydget-avatar-itself">\n' + 
+'               <a href="' + author.profilePageUrl + '">\n' + 
+'                   <img class="tydget-thumbnail" src="' + get_resized_avatar(author, 50) + '">\n' + 
+'               </a>\n' + 
+'           </div>\n' + 
+'       </div>';
+
+    return innerHTML;
+}
+
+function create_event_detail(obj, author) {
+    var innerHTML = "";
+    
+    innerHTML += 
+'       <div class="tydget-event-detail">\n' + 
+'           <span class="tydget-action-string">\n'  + 
+'               <a class="tydget-author_link" href="' + author.profilePageUrl + '">' + get_author_name(author) + '</a>\n' + 
+'               <a class="tydget-action-string" href="' + obj.permalinkUrl + '">' + action_wording(obj, author) + '</a>\n' + 
+'           </span>\n' + 
+'       </div>\n';
+
+    return innerHTML;
+}
+
+function create_event_footer(obj, author) {
+    var innerHTML = "";
+    
+    innerHTML += 
+'       <div class="tydget-event_footer_div">\n' + 
+'           <div class="tydget-comment-div">\n' + 
+'               <a class="tydget-comment-link" href="' + obj.permalinkUrl + '#comments">' + obj.commentCount + '</a>\n' + 
+'           </div>\n' + 
+'           <div class="tydget-fav-div">\n' + 
+'               <a class="tydget-fav-link" href="' + obj.permalinkUrl + '#comments">' + obj.favoriteCount + '</a>\n' + 
+'           </div>\n' + 
+'       </div>\n';
+
+    return innerHTML;
+}
+
+function action_wording(obj, author) {
+
+    var post_type = get_post_wording(obj);
+    var action = get_action_wording(obj);
+    
+    // borrow the twitter length for simplicity.
+    var string_length = 140;
+      
+    var title = "";
+    // create the title.
+    // Audio link titles have funky strings.
+    if (obj.title && (!obj.audioLink)) {
+        title = chop_str(obj.title, (string_length - action.length - post_type.length - author.displayName.length)); //.substring(0, 75);
+    }
+    else if (obj.content) {
+        title = chop_str(obj.content, (string_length - action.length - post_type.length - author.displayName.length));
+    }
+
+    var html_string = " " + action + " " + post_type;
+    if (title) {
+        html_string += " '" + title + "'";
+    }
+    
+    return html_string;
 }
