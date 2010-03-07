@@ -1,27 +1,56 @@
 <html>
+	<meta name="http-equiv" content="Content-type: text/html; charset=UTF-8"/>
 <head>
 
 	<!-- var mmmeow_events_url = 'http://api.typepad.com/groups/6p0120a6255c8c970b/events.json?max-results=5&start-index=1'; -->
 		
 
 
-	<title>another site</title>
+	<title>Avatar Tydget</title>
 
 </head>
 <body>
 
 
 		<style type="text/css">
-			.typepad_widget {
+			.tydget {
 				/* border: 2px dotted; */
-				border: 10px solid #B6D5E8;
-				width: 350px;
+				border: 5px solid #DDDDDD;
+				width: 380px;
+				height: 385px;
 
-				background: #ACF1FF url('http://www.mmmeow.com/static/themes/app/images/rainbow.png') no-repeat scroll 15px bottom;
+
+/*				height without the footer in place
+
+                height: 358px; 
+*/
+
+/*				blue lady -- look ok but doesnt stretch well
+				background: #0B4081 url('http://a6.typepad.com/6a0128755f6728970c0120a8ee3116970b-500pi') no-repeat scroll 0 bottom ; 
+*/
+
+
+/*				background: #0B4081 url('http://a4.typepad.com/6a0128755f6728970c01310f366974970c-640pi') no-repeat scroll 0 0;   */
+                background: #0B4081;
+
+
+
 				font-family: "Helvetica Neue", Arial, Verdana;
+/*
+	this is on avatar now but looks horrendous locally 
+				font-family: "Lucida Grande,helvetica,sans-serif";
+*/
+			}
+			
+			.tydget-inner-body {
+				overflow: auto; 
+				height: 290px;
+/*				margin-right: 2px; */
+                background: #0B4081 url('http://a4.typepad.com/6a0128755f6728970c01310f366974970c-640pi') no-repeat scroll 0 0;  
+
 			}
 
-			img.thumbnail {
+			img.tydget-thumbnail {
 				height: 40px;
 				width: 40px;
 				overflow: hidden;
@@ -29,7 +58,7 @@
 
 				border: 0 none;
 		    }
-			.event-detail {
+			.tydget-event-detail {
 				margin-left: 55px;
 				margin-right: 10px;
 				background: #FFFFFF;
@@ -37,36 +66,36 @@
 				-mos-opacity:0.5;
 				opacity: 0.75;
 			}
-			.event {
+			.tydget-event {
 				overflow: hidden;
 	/*			border-bottom: 1px dotted #DDDDDD;  */
 				background: transparent;
 				padding-bottom: 10px;	
 			}
-			.event-wrapper {
+			.tydget-event-wrapper {
 				overflow: hidden;
 			}
-			.avatar-wrapper {
+			.tydget-avatar-wrapper {
 	/*			display: block; */
 				padding: 6px 8px; 
 				float: left;
 				text-align: left;
 			}
-			.avatar-itself {
+			.tydget-avatar-itself {
 				height: 40px;
 				width:40 px;
 			}
-			a.author_link {
+			a.tydget-author_link {
 				color: #7D44DB;
 			}
 
-			p {
+			p.tydget {
 				line-height: 1.2 !important; 
 				margin: 0 !important;
 				padding: 0 !important;
 				width: auto !important;
 			}
-			.event_footer_div {
+			.tydget-event_footer_div {
 				float: right;
 				padding: 4px 12px; 
 				display: block;
@@ -74,7 +103,7 @@
 				vertical-align: baseline;  */
 			}
 
-			a.comment-link, a.comment-div {
+			a.tydget-comment-link, a.tydget-comment-div {
 				-moz-background-clip: border;
 				-moz-background-inline-policy: continuous;
 				-moz-background-origin: padding;
@@ -90,11 +119,13 @@
 				color: #FFFF00; 
 			}
 
-			a.fav-link, a.fav-div {
+			a.tydget-fav-link, a.tydget-fav-div {
 				-moz-background-clip: border;
 				-moz-background-inline-policy: continuous;
 				-moz-background-origin: padding;
-				background: transparent url(http://mmmeow.com/static/themes/app/images/favorite.png) no-repeat scroll left 0;			
+
+				background: transparent url(http://avatar.typepad.com/static/themes/app/images/favorite.png) no-repeat scroll left 0;			 
+
 				float: left;
 				background-position: 10px 50%;
 				display: block;
@@ -106,14 +137,14 @@
 	/*			margin-right: 10px; */
 				color: #FFFF00;
 			}
-			.comment-div {
+			.tydget-comment-div {
 				font-size: 12px;
 				display: block;
 				margin-bottom: 0.5em;
 	/*			padding: 0 25px; */
 			}
 
-			.fav-div {
+			.tydget-fav-div {
 				font-size: 12px;
 				display: block;
 				margin-bottom: 0.5em;
@@ -121,69 +152,76 @@
 				margin-right: 15px;
 
 			}
-			.comment-img {
+			.tydget-comment-img {
 				background: transparent url(http://mmmeow.com/static/themes/app/images/comments.png) no-repeat scroll 0 0;			
 				padding: 2px 2px;			
 			}
 
-			.header-div {
+			.tydget-header-div {
 	/*			background: transparent url('http://www.mmmeow.com/static/themes/app/images/banner2.png') no-repeat scroll 0 0; */
-				height: 65px;
+				height: 50px;
 				text-align: right;
 				display: block;
 				padding: 4px 6px;
-				margin-bottom: 14px;
+				margin-bottom: 10px; 
 
 			}
-			.header-title {
+			.tydget-header-title {
 				clear:both;
-				font-size:55px;
-				text-align: right;
+				font-size:30px;
+				text-align: middle;
 				margin-right: 10px;
-				color: #7D44DB;
+		/* gray is too light 
+				color: #DDDDDD;
+		*/
+				color: #FFFF00;
 				line-height: 40px;
 				text-decoration: none;
 				font-weight: bold;
 			}
-			.header-precursor {
-				color: #555555;
+			.tydget-header-precursor {
+				color: #DDDDDD;
 			}
-			a.action-string {
+			a.tydget-action-string {
 				text-decoration: none;
 				color: #555555;
 			}
-					.tydget-footer-outer {
-                        clear: both;
-        				height: 20px;
-        				width: auto;
-        				background: #7D44DB;    
-        			}
-
-        			.tydget-footer-inner {
-        			    float: right;
-        			    margin-right: 4px;
-        			    background: transparent url('http://www.parishilton.com/paris-hilton/site-styles/images/footer-logo-tp.gif') no-repeat 0 0;
-        			    display: block;
-        			    width: 150px; 
-        			    text-decoration: none;
-        			}
-        			.tydget-footer-logo {
-                         float: right;
-                         width: auto;
-                         text-decoration: none;
-                         color: #7D44DB;
-        			}
 			
+			.tydget-footer-outer {
+                clear: both;
+				height: 20px;
+/*
+				color: #FFFF00;
+				display: block; 
+				margin-top: 5px;
+				padding: 4px 6px;
+*/
+				width: auto;
+			}
+			
+			.tydget-footer-inner {
+			    float: right;
+			    margin-right: 4px;
+			    background: transparent url('http://www.parishilton.com/paris-hilton/site-styles/images/footer-logo-tp.gif') no-repeat 0 0;
+			    display: block;
+			    width: 150px;
+
+			}
+			.tydget-footer-logo {
+                
+                 float: right;
+                 width: auto;
+                 text-decoration: none;
+                 color: #0B4081;
+
+			}
 		</style>	
+		
 	<div id="tydget"></div>
 	
 
-	<!--<script type="text/javascript" src="http://community.parishilton.com/events-cached.js?callback=?jsonTypePadEventsFeed"></script>-->
-<!--	<script type="text/javascript" src="http://dev3.apperceptive.com/typepad/typepad_parsing.js"></script> -->
-	<script type="text/javascript" src="http://localhost/Tydget/javascript_solution/typepad_parsing.js"></script> 
-	<script type="text/javascript" src="http://api.typepad.com/groups/6p0120a6255c8c970b/events.js?max-results=8&start-index=1&callback=event_callback"></script>
-
-
+	<script type="text/javascript" src="http://localhost/javascript_solution/typepad_parsing.js"></script> 
+	<script type="text/javascript" src="http://api.typepad.com/groups/6p0128755f317d970c/events.js?max-results=15&start-index=1&callback=event_callback"></script>
 </body>
 
 </html>
