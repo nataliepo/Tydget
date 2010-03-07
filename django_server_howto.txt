@@ -1,29 +1,15 @@
 install:
 
-  mkdir /Library/WebServer/Documents/django_templates/
-  mkdir /Library/WebServer/Documents/django_templates/polls/
+  cp -r django_frontend/* /Library/WebServer/Documents/Tydget/django_frontend/
 
-  mv django_frontend/index.html /Library/WebServer/Documents/django_templates/polls
 
-usage:
+run server:
+    cd Tydget/style-picker/style911
+    python manage.py runserver
+    
+view in browser:
+    http://127.0.0.1:8000/style911/
+    
+    
 
-	cd django_server/tydget_server
-
-	python manage.py runserver
-	
-View http://127.0.0.1:8000/polls/
-	* should show an error message, XID is required
-	
-View http://127.0.0.1:8000/polls/1231134/ (any [\d]+)
-	* should show nataliepo's user information (hardcoded)
-	
-	
-*** http://127.0.0.1:8000/group/12346/ is the newest url.	
-	
-	
-remaining tasks:
-	* remove hardcoding of nataliepo's xid
-	* fix urls.py to respect regexp rules (6p([\d]+))
-	* provide meaningful listing of objects instead of junk
-
-	
+  
