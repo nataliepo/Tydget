@@ -46,5 +46,6 @@ class TydgetField(models.Model):
             txt_widget = TextFieldWidget()
             return txt_widget.render(self.input_id, self.value)
 
-            
+
+
         
