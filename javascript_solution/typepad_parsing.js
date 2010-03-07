@@ -188,16 +188,9 @@ function create_event_snippet(obj, outer_div, author) {
       fav_link.innerHTML = obj.favoriteCount;
       
       fav_div.appendChild(fav_link);
-      // Having a really hard time getting the Favorites star
-      // aligned with the Comment bubbles :(
-      //event_footer_div.appendChild(fav_div); 
-      
-//      event_detail_div.appendChild(event_footer_div);
+      event_footer_div.appendChild(fav_div); 
       
       outer_div.appendChild(event_footer_div); 
-      
-      
-
 }
 
 
