@@ -184,16 +184,19 @@ function get_action_verb (obj) {
 }
 
 function get_resized_avatar (user, size) {
- 
-   for (var i = 0; i < user.links.length; i++) {
-      if (user.links[i].rel == "avatar") {
-         if (user.links[i].width < 125) {
-               return user.links[i].href;
-         } 
-      }
-   }
+    // use the lilypad as a default in case all else fails
+    var default_avatar = 'http://up3.typepad.com/6a00d83451c82369e20120a4e574c1970b-50si';
+    
+    
+    for (var i = 0; i < user.links.length; i++) {
+        if (user.links[i].rel == "avatar") {
+            if (user.links[i].width < 125) {
+                return user.links[i].href;
+            } 
+        }
+    }
 
-   return "http://up2.typepad.com/6a01157087cbfa970b0120a64430f2970c-50si";
+   return default_avatar;
 }
 
 function get_site_name (url) {
