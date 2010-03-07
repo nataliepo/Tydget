@@ -4,9 +4,7 @@ TypePad + Widget = Tydget.  It uses JavaScript to insert a doo-dad ideal for sid
 
 
 # What's the status?
-It's in super-alpha:
-* basic QA and only in FF 3.5.3
-* tested among a handful of Motion groups but not all of them
+It's in super-alpha.  It's only been tested in FF 3.5.3 among a handful of Motion sites.
 
 
 # How do I use it?
