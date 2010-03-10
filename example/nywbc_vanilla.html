@@ -2,13 +2,67 @@
 <head>
     <title>vanilla example</title>
     
+    <style type="text/css">
+		#tydget {
+			font-family: "Helvetica Neue", Arial, Verdana;
+			color:#888;
+			width:300px;
+			font-size:13px;
+		}
+		#tydget a{
+		    color:#666;
+		    text-decoration:none;
+		    font-weight:300;
+		}
+		.tydget-header-precursor{
+		   font-size:11px; 
+		   font-family:Garamond;
+		}
+		
+		.tydget-header-title{
+		    font-size:30px;
+		    font-family:Garamond;
+		    color:#ccc !important;
+		}
+		
+	    .tydget-avatar-wrapper{
+	        float:left;
+	        margin-right:15px;
+	    }
+	    .tydget-thumbnail{
+	        border:1px solid #ccc;
+	    }
+	    .tydget-event{
+	        overflow:hidden;
+	        margin:25px 15px;
+	    }
+		.tydget-event_footer_div{
+		    float:right;
+		}
+		.tydget-comment-div{
+		    float:left;
+		    margin:3px 5px;
+		}
+		.tydget-fav-div{
+		    float:left;
+		    margin:3px 5px;
+		}
+		.tydget-fav-div a, .tydget-comment-div a{
+		    font-weight:bold !important;
+		    color:#aaa !important;
+	    }
+	    
+	    # http://www.nataliepo.com/tydget_images/fav-on.png
+	    # http://www.nataliepo.com/tydget_images/fav-off.png
+	    # http://www.nataliepo.com/tydget_images/comments.png
+	</style>
 </head>
 
 <body>
     
     <div id="tydget"></div>
     <script type="text/javascript" src="http://localhost/javascript_solution/typepad_parsing.js"></script> 
-    <script type="text/javascript" src="http://api.typepad.com/groups/6p0120a604b654970c/events.js?max-results=5&start-index=1&callback=event_callback"></script>
+    <script type="text/javascript" src="http://api.typepad.com/groups/6p0120a5e990ac970c/events.js?max-results=5&start-index=1&callback=event_callback"></script>
 	
 </body>
 

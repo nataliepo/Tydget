@@ -47,3 +47,6 @@ You'll either want to insert in-line css or make a custom stylesheet for each of
 
 ## Examples
 The examples/ directory has a few Tydget examples, including some with in-line styles.  Warning: these styles are loud and natalified and I would love for someone to improve them  or provide alternatives. :)
+
+# What if I have questions?
+Go to the 'Issues' tab and ask!
