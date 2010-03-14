@@ -1,4 +1,4 @@
-function event_callback(json_response) {
+function community_callback(json_response) {
 
     var tydget = document.getElementById("tydget");
 
@@ -143,6 +143,5 @@ function create_event_footer (obj, author) {
 /***************
  * utility fns to help parse the api or formulate something for tydget
  ***************/
-
 /* These are all hosted in Boone/library/utilites.js */
 
