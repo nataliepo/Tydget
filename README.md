@@ -35,7 +35,7 @@ Somewhere inside the <body> tag of your HTML page, insert (in this order):
     <script type="text/javascript" src="http://localhost/javascript_solution/typepad_parsing.js"></script> 
 
 Then, replace the <XID> part of this string with the XID you noted in the previous step:
-    <script type="text/javascript" src="http://api.typepad.com/groups/<XID>/events.js?max-results=5&start-index=1&callback=event_callback"></script>
+    <script type="text/javascript" src="http://api.typepad.com/groups/<XID>/events.js?max-results=5&start-index=1&callback=community_callback"></script>
     
 The last line uses the TypePad Group API to list the most recent events in a particular Motion group in JSON format.  Then it calls the event_callback() function defined in Tydget's typepad_parsing.js, and the HTML code is created based on the contents of the events stream.
 
