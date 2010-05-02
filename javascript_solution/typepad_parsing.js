@@ -197,12 +197,16 @@ function get_resized_avatar (user, size) {
     var default_avatar = 'http://up3.typepad.com/6a00d83451c82369e20120a4e574c1970b-50si';
     
     
-    for (var i = 0; i < user.links.length; i++) {
-        if (user.links[i].rel == "avatar") {
-            if (user.links[i].width < 125) {
-                return user.links[i].href;
-            } 
-        }
+     //for (var i = 0; i < user.links.length; i++) {
+     //     if (user.links[i].rel == "avatar") {
+     //      if (user.links[i].width < 125) {
+     //             return user.links[i].href;
+     //        } 
+    //     }
+    // }
+
+    if (user.avatarLink) {
+       return user.avatarLink.url;
     }
 
    return default_avatar;
